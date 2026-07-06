@@ -34,7 +34,7 @@ results/     every measured row (schema v1/v1.1 CSVs) + hash-chained evidence.js
 ```
 
 The complete dataset (with a data card, raw powermetrics capture, and integrity
-manifest) is also published on Hugging Face: `<HF_DATASET_URL>`.
+manifest) is also published on Hugging Face: `https://huggingface.co/datasets/vimalnakrani/stillwarm-bench-results`.
 
 ## Figures (each computed from the named files only)
 
