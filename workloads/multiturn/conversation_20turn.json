@@ -1,0 +1,28 @@
+{
+  "name": "multiturn-20-v1",
+  "description": "Scripted 20-turn conversation replay. Fixed user turns; assistant replies are generated. Context accumulates (early turns state facts the later turns rely on), so cross-turn cache persistence is exercised. Greedy/deterministic. Used directly by the multi-turn scenario and, with a mid-run restart, by restart_scenario.json.",
+  "system": "You are a concise planning assistant for a fictional Arctic research expedition. Track the details the user gives you and stay consistent with them.",
+  "sampling": {"temperature": 0, "top_k": 1, "seed": 42, "n_predict": 64},
+  "turns": [
+    {"turn": 1,  "user": "We're planning a fictional Arctic research expedition. The ship is called the Aurora Borealis. Note that name."},
+    {"turn": 2,  "user": "The expedition has 18 crew and departs from Archangel on the 1st of June. Remember those two facts."},
+    {"turn": 3,  "user": "Our lead scientist is Dr. Margaret Saville. The pilot is Captain Robert Walton."},
+    {"turn": 4,  "user": "Primary objective: map three uncharted fjords. Secondary objective: collect ice-core samples."},
+    {"turn": 5,  "user": "Fuel budget is 40 tonnes of diesel; we must return with at least 8 tonnes in reserve."},
+    {"turn": 6,  "user": "The ice-core drill can reach 90 metres. Each core takes about 6 hours to extract."},
+    {"turn": 7,  "user": "Given a 6-hour core and 90-metre reach, roughly how many cores can we take in a 30-day window if we drill 12 hours a day?"},
+    {"turn": 8,  "user": "Good. Now: the radio has a 200 km range. Base camp relays to Archangel. Plan a relay if we go 500 km out."},
+    {"turn": 9,  "user": "Add a safety rule: if reserve fuel drops below 8 tonnes, we turn back immediately, objectives unmet."},
+    {"turn": 10, "user": "Summarize everything decided so far: ship, crew, departure, people, objectives, fuel rule, drill, radio."},
+    {"turn": 11, "user": "The weather window just shortened from 30 days to 22. Recompute the core estimate from turn 7."},
+    {"turn": 12, "user": "We can add a second drill team working the other 12 hours. How does that change the 22-day estimate?"},
+    {"turn": 13, "user": "One fjord turned out to be already charted. Reduce the primary objective to two fjords."},
+    {"turn": 14, "user": "Dr. Saville requests 2 extra tonnes of fuel for a detour. Does that break the reserve rule? Show the arithmetic."},
+    {"turn": 15, "user": "Approve the detour only if we still return with 8 tonnes. State your decision and why."},
+    {"turn": 16, "user": "Draft a 3-line status message to Archangel using the radio relay plan from turn 8."},
+    {"turn": 17, "user": "Captain Walton wants the crew count and departure port restated for the log. Give exactly those two."},
+    {"turn": 18, "user": "List our two current objectives after the turn-13 change."},
+    {"turn": 19, "user": "If both drill teams run for the full 22 days, and each core is 6 hours, how many cores total? Show the calc."},
+    {"turn": 20, "user": "Final recap in 5 bullet points: ship, crew+port, people, objectives, and the fuel safety rule."}
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "name": "docchat-questions-v1",
+  "description": "Fixed question set for the doc-chat workload. Each question is appended after a doc_{N}.txt cut via prompt_template. Written to be answerable from ANY prefix of the source (so the same set applies across the whole 2K..32K ladder). For TTFT experiments the content of the answer is secondary; the set is frozen so prompts are identical across compared runs.",
+  "prompt_template": "{doc}\n\n---\nBased only on the text above, answer concisely.\nQuestion: {question}\nAnswer:",
+  "primary_question_id": "q1",
+  "questions": [
+    {"id": "q1", "text": "Summarize the text above in three sentences."},
+    {"id": "q2", "text": "Who are the people named in the text above, and how are they related?"},
+    {"id": "q3", "text": "Where do the events described in the text above take place?"},
+    {"id": "q4", "text": "What is the tone or mood of the narrator in this passage?"},
+    {"id": "q5", "text": "What happens in the final paragraph of the text above?"}
+  ]
+}

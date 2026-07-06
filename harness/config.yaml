@@ -1,0 +1,58 @@
+# stillwarm-bench harness configuration
+# Source of truth for paths, disk budget, and (later) the model registry + ladder.
+# Values marked TODO are filled in during the phase that produces them — never
+# fabricated. See PLAN.md §3 and §6.
+
+# --- Disk discipline (PLAN.md §0, §12) -------------------------------------
+# Gate-0 amendment (2026-07-04): measured free space ≈ 218 GB (below the old 250
+# budget), so lowered to 180 to leave OS/swap headroom on the shared APFS container.
+DISK_BUDGET_GB: 180
+
+# --- Paths (relative to repo root unless absolute) -------------------------
+paths:
+  save_path: ./cache_saves/        # llama-server --slot-save-path target
+  results: ./results/
+  results_raw: ./results/raw/
+  workloads: ./workloads/
+  models_dir: ~/models/            # GGUF files live here (outside the repo)
+
+# --- Pinned llama.cpp build (PLAN.md §0 "pin everything") -------------------
+# Full detail (build flags, --help) recorded in env/llamacpp.lock + LABLOG.md.
+llamacpp:
+  release_tag: b9871
+  commit_sha: ef2d770117db45b05aa7ecd1b0acca36370c5470
+  server_binary: TODO   # absolute path, filled after Release build succeeds
+
+# --- Model registry (PLAN.md §12 trio) -------------------------------------
+# SHA-256 recorded in env/models.lock after download + approval. Do NOT fabricate.
+models:
+  primary:
+    name: Llama-3.1-8B-Instruct-Q4_K_M
+    role: standard
+    repo: bartowski/Meta-Llama-3.1-8B-Instruct-GGUF
+    file: Meta-Llama-3.1-8B-Instruct-Q4_K_M.gguf
+    sha256: 7b064f5842bf9532c91456deda288a1b672397a54fa729aa665952863033557c
+  swa:
+    name: Gemma-3-4B-it-Q4_K_M
+    role: SWA
+    repo: bartowski/google_gemma-3-4b-it-GGUF
+    file: google_gemma-3-4b-it-Q4_K_M.gguf
+    sha256: 4996030242583a40aa151ff93f49ed787ac8c25e4120c3ae4588b2e2a7d1ae94
+  low_kv_head:
+    name: Qwen2.5-7B-Instruct-Q4_K_M
+    role: low-KV-head
+    repo: bartowski/Qwen2.5-7B-Instruct-GGUF
+    file: Qwen2.5-7B-Instruct-Q4_K_M.gguf
+    # expected from HF LFS oid (2026-07-04); verified against local shasum after download
+    sha256: 65b8fcd92af6b4fefa935c625d1ac27ea29dcb6ee14589c55a8f115ceaaa1423
+
+# --- Context ladder (PLAN.md §6) -------------------------------------------
+# Token lengths for the doc-chat workload. 65536/131072 are stretch rungs.
+ladder_tokens: [2048, 4096, 8192, 16384, 32768]
+ladder_stretch_tokens: [65536, 131072]
+
+# --- Determinism (PLAN.md §0) ----------------------------------------------
+determinism:
+  temperature: 0        # greedy decoding
+  seed: 42              # fixed seed across all compared runs
+  top_k: 1

@@ -1,0 +1,47 @@
+{
+  "full_tokens": 97954,
+  "cuts": [
+    {
+      "label": "2k",
+      "target_tokens": 2048,
+      "actual_tokens": 2048,
+      "chars": 8733,
+      "file": "workloads/docchat/doc_2k.txt"
+    },
+    {
+      "label": "4k",
+      "target_tokens": 4096,
+      "actual_tokens": 4096,
+      "chars": 17612,
+      "file": "workloads/docchat/doc_4k.txt"
+    },
+    {
+      "label": "8k",
+      "target_tokens": 8192,
+      "actual_tokens": 8192,
+      "chars": 35321,
+      "file": "workloads/docchat/doc_8k.txt"
+    },
+    {
+      "label": "16k",
+      "target_tokens": 16384,
+      "actual_tokens": 16384,
+      "chars": 71331,
+      "file": "workloads/docchat/doc_16k.txt"
+    },
+    {
+      "label": "32k",
+      "target_tokens": 32768,
+      "actual_tokens": 32768,
+      "chars": 141362,
+      "file": "workloads/docchat/doc_32k.txt"
+    },
+    {
+      "label": "64k",
+      "target_tokens": 65536,
+      "actual_tokens": 65536,
+      "chars": 281436,
+      "file": "workloads/docchat/doc_64k.txt"
+    }
+  ]
+}

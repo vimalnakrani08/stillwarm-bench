@@ -1,0 +1,13 @@
+{
+  "name": "restart-kill10-v1",
+  "description": "Restart/persistence scenario. Replay the 20-turn conversation; after the assistant answers turn 10, SAVE the slot, KILL the server, restart it, RESTORE the slot, then continue turns 11-20. The turn-11..20 prompts reference facts established in turns 1-10, so a correct+reused restore lets the model answer them without re-reading the whole history. Compared against a cold control that recomputes the 10-turn history after restart.",
+  "base_conversation": "workloads/multiturn/conversation_20turn.json",
+  "kill_after_turn": 10,
+  "save_before_kill": true,
+  "restore_after_restart": true,
+  "resume_at_turn": 11,
+  "controls": {
+    "cold_recompute": "After restart, do NOT restore; send the full turn-1..11 history cold. Its TTFT/prompt_n is the baseline the restored path is compared against.",
+    "checks": "Every resumed turn runs the reuse assertion (prompt_n_warm <= new_input_tokens + 8). Turn 11 also runs the verified-restore probe (64 greedy tokens byte-diff vs the cold-recompute control)."
+  }
+}
