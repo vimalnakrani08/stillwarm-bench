@@ -2,7 +2,7 @@
 
 **Does saving a llama.cpp conversation's KV cache to disk actually work — and
 what is it worth?** A frozen-harness benchmark on consumer Apple Silicon, plus
-every measured row, behind the [stillwarm](<GITHUB_TOOL_URL>) tool.
+every measured row, behind the [stillwarm](https://github.com/vimalnakrani08/stillwarm) tool.
 
 **Setup (pinned):** MacBook Pro M3 Max (36 GB unified memory), macOS 26.5.1,
 llama.cpp release **b9871** (`ef2d770117db45b05aa7ecd1b0acca36370c5470`, Metal,
