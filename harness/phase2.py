@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Phase-2 experiment orchestrator (PLAN §6). Schema v1 rows, one CSV per block/rung.
+"""
 
 Block A modes (mechanisms isolated — only the mode's own cache path is active):
   cold          --cache-ram 0, cache_prompt=false, q1 x (warmup+N)
@@ -11,9 +11,6 @@ Block A modes (mechanisms isolated — only the mode's own cache path is active)
                 the doc+qi one. Verbose evidence cycle runs separately (8K rung).
   disk_restore  --cache-ram 0; S1 primes doc (n_predict=0) + saves + killed;
                 S2: per rep erase -> restore -> doc+qi.
-
-Warm/restored reps ALWAYS carry the probe (byte-diff vs the cold baseline for the
-same question) and the reuse assertion (prompt_n <= new_input_tokens + 8).
 """
 from __future__ import annotations
 import argparse, csv, json, os, shutil, subprocess, sys, datetime, statistics
