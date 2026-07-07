@@ -1,7 +1,7 @@
-# Frozen workloads (Phase 1)
+# Frozen workloads
 
 All files here are **frozen inputs** — locked before any measurement so every published
-number traces to identical prompts (PLAN §5.2). Integrity is pinned by `MANIFEST.sha256`.
+number traces to identical prompts. Integrity is pinned by `MANIFEST.sha256`.
 
 ## Source text (doc-chat)
 - **Work:** *Frankenstein; or, The Modern Prometheus* by Mary Wollstonecraft (Godwin) Shelley.
@@ -29,9 +29,8 @@ to confirm). Actual counts (`cuts_tokencount.json`) all matched targets exactly:
 | doc_32k.txt   | 32768  | 141,362 |
 | doc_64k.txt   | 65536  | 281,436 |
 
-(64K added at Gate-1 housekeeping; regenerating the ladder reproduced the earlier cuts
-byte-identically.) **128K is SKIPPED for v1** — the source has only 97,954 tokens; a 128K rung
-would require a disclosed two-text concatenation (future work, see PLAN §6).
+(Regenerating the ladder reproduced the earlier cuts byte-identically.) **128K is SKIPPED for v1** — the source has only 97,954 tokens; a 128K rung
+would require a disclosed two-text concatenation (future work).
 
 - `questions.json` — fixed 5-question set + `prompt_template` (how a cut + question combine).
 

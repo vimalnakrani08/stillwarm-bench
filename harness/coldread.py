@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Supervised COLD-READ restore protocol (Block B, page_cache_state=cold_read).
 
-RUN THIS INTERACTIVELY IN A TERMINAL WITH VIMAL PRESENT — it pauses before every
+RUN THIS INTERACTIVELY IN A TERMINAL WITH AN OPERATOR PRESENT — it pauses before every
 restore rep so `sudo purge` can be run in another terminal (purging the page cache
 needs sudo; the harness itself never invokes sudo).
 

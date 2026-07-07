@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
-"""stillwarm-bench Phase-1 runner (PLAN §5).
+"""stillwarm-bench measurement runner.
 
 Launches llama-server, runs a scenario, writes one CSV row per measured rep with
 the complete config + client TTFT + server timings (verbatim) + prompt_n + memory
 + probe/reuse verdicts + raw-log paths, emits AuditWeave evidence, then enforces the
-disk budget. REFUSES any measured config without flash-attn 'on' (Gate-0 amendment).
+disk budget. REFUSES any measured config without flash-attn 'on' (policy).
 
 Scenarios:
   determinism   - BLOCKING pre-test: same cold recompute x2, byte-diff 64 tokens.
@@ -65,7 +65,7 @@ def doc_tokens_of(doc_label):
 def validate_fa(flash_attn):
     if flash_attn != "on":
         raise SystemExit(f"REFUSED: measured runs require flash_attn 'on' (got {flash_attn!r}). "
-                         "Gate-0 amendment: 'auto' is banned in measurements.")
+                         "Policy: 'auto' is banned in measurements.")
 
 
 def base_row(cfg_common):

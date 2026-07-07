@@ -15,7 +15,7 @@ REPO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SRC = os.path.join(REPO, "workloads/source/frankenstein_pg84.txt")
 OUTDIR = os.path.join(REPO, "workloads/docchat")
 LADDER = [("2k", 2048), ("4k", 4096), ("8k", 8192), ("16k", 16384), ("32k", 32768),
-          ("64k", 65536)]   # 64K added at Gate-1 housekeeping (source has 97,954 tok)
+          ("64k", 65536)]   # source has 97,954 tokens, so 64K is the top rung
 
 ap = argparse.ArgumentParser()
 ap.add_argument("--port", type=int, default=8080)

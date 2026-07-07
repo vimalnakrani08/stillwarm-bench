@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """llama-server subprocess lifecycle + memory sampling + startup-log buffer parsing.
 
-Timing rule (PLAN §5.3): timed runs use DEFAULT verbosity (quiet) so per-request
+Timing rule: timed runs use DEFAULT verbosity (quiet) so per-request
 logging can't skew the stopwatch. KV/Metal buffer sizes (config-deterministic) are
 captured from a SEPARATE `-lv 5` profile launch that serves no timed requests.
 """

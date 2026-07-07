@@ -1,26 +1,26 @@
 #!/usr/bin/env python3
-"""SUPERVISED SESSION (hardened) — run interactively in a terminal with Vimal present.
+"""Supervised measurement session — run interactively with an operator present.
 
-One sitting, four parts (Gate-2 WS2). Pauses at every manual sudo step; the harness
-itself NEVER invokes sudo.
+One sitting, four parts; the script pauses at every manual sudo step (it never
+invokes sudo itself):
 
-  A. Thermal-controlled headline re-run — f16, rungs 8K/32K/64K, 5x ALTERNATING
+  A. Thermally controlled headline re-run — f16, rungs 8K/32K/64K, 5x ALTERNATING
      cold/restore per rung (same thermal state both sides).            (~42 min)
   B. Cold-read restores — `sudo purge` before EVERY rep, x3 per rung.  (~12 min)
   C. dd of the 64K save file after a purge (+ warm contrast).          (~3 min)
   D. Guided powermetrics capture: one 32K cold + one 32K restore.      (~6 min)
 
-HARDENING (2026-07-05, after the premature-completion incident):
+Robustness features:
   * every measured rep is APPENDED to its CSV immediately — a crash loses at most
     one rep, never a session;
   * every prompt survives EOF/Ctrl-C with an explicit "SESSION ABORTED at <step>";
   * --resume skips parts (and Part-A rungs) whose outputs already exist;
   * start-of-run self-check prints every output destination;
   * END-OF-RUN ARTIFACT VERIFICATION: checks every expected file exists and is
-    non-empty, prints a manifest (paths, sizes, row counts) and ONLY THEN prints
-    the exact completion line (with a manifest digest) to paste back. Anything
+    non-empty, prints a manifest (paths, sizes, row counts), and only then prints
+    a self-verifying completion line carrying a digest of that manifest. Anything
     missing -> "SESSION INCOMPLETE" + the missing list instead. The completion
-    declaration cannot be produced without the artifacts.
+    line cannot be produced without the artifacts actually existing.
 
 Usage:
     .venv/bin/python harness/supervised_session.py                # all parts
@@ -334,7 +334,7 @@ def print_verdict(parts):
     digest = hashlib.sha256(json.dumps(manifest, sort_keys=True).encode()).hexdigest()[:12]
     total_rows = sum(e["rows"] or 0 for e in manifest if isinstance(e["rows"], int))
     print("\nAll expected artifacts present and non-empty.")
-    print("Paste EXACTLY this line back as the session-completion report:")
+    print("Session-completion report (self-verifying; keep it with your notes):")
     print(f"\nSUPERVISED SESSION COMPLETE — ARTIFACTS VERIFIED "
           f"(manifest {digest}, {len(manifest)} files, {total_rows} csv rows)\n")
     return True

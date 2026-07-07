@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Block F — aggregate every Phase-2 warm/restored row: totals, probe/reuse pass
+"""Block F — aggregate every warm/restored row in the results: totals, probe/reuse pass
 counts, and every exception, straight from the results CSVs (schema v1 only)."""
 import csv, glob, json, os, sys
 from collections import Counter
@@ -16,7 +16,7 @@ def main():
             rows.append(r)
     v1 = [r for r in rows if r.get("schema_version", "").startswith("1")]
     warm_all = [r for r in v1 if r["mode"] in WARM_MODES]
-    # WS1.2 rule: the aggregate counts ONLY fully-stamped warm rows (probe, reuse AND
+    # Counting rule: the aggregate counts ONLY fully-stamped warm rows (probe, reuse AND
     # outcome all present). Unstamped rows were backfilled 2026-07-05 (pure function of
     # recorded verdicts); any row still incomplete is listed, not silently counted.
     warm = [r for r in warm_all
@@ -37,7 +37,7 @@ def main():
     out = {
         "counting_rule": ("only fully-stamped warm rows are counted (probe_result + "
                           "reuse_assert + outcome all present); 45 pre-stamping rows "
-                          "were deterministically backfilled 2026-07-05 (WS1.2)"),
+                          "were deterministically backfilled 2026-07-05"),
         "total_v1_rows": len(v1),
         "total_rows_all_blocks": len(rows),
         "warm_restored_rows": len(warm),

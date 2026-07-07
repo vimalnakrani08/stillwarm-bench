@@ -1,10 +1,10 @@
 # stillwarm-bench harness configuration
 # Source of truth for paths, disk budget, and (later) the model registry + ladder.
 # Values marked TODO are filled in during the phase that produces them — never
-# fabricated. See PLAN.md §3 and §6.
+# fabricated.
 
-# --- Disk discipline (PLAN.md §0, §12) -------------------------------------
-# Gate-0 amendment (2026-07-04): measured free space ≈ 218 GB (below the old 250
+# --- Disk discipline --------------------------------------------------------
+# 2026-07-04: measured free space ≈ 218 GB (below the earlier 250
 # budget), so lowered to 180 to leave OS/swap headroom on the shared APFS container.
 DISK_BUDGET_GB: 180
 
@@ -16,14 +16,14 @@ paths:
   workloads: ./workloads/
   models_dir: ~/models/            # GGUF files live here (outside the repo)
 
-# --- Pinned llama.cpp build (PLAN.md §0 "pin everything") -------------------
-# Full detail (build flags, --help) recorded in env/llamacpp.lock + LABLOG.md.
+# --- Pinned llama.cpp build ("pin everything") ------------------------------
+# Full detail (build flags, --help) recorded at build time.
 llamacpp:
   release_tag: b9871
   commit_sha: ef2d770117db45b05aa7ecd1b0acca36370c5470
   server_binary: TODO   # absolute path, filled after Release build succeeds
 
-# --- Model registry (PLAN.md §12 trio) -------------------------------------
+# --- Model registry ---------------------------------------------------------
 # SHA-256 recorded in env/models.lock after download + approval. Do NOT fabricate.
 models:
   primary:
@@ -46,12 +46,12 @@ models:
     # expected from HF LFS oid (2026-07-04); verified against local shasum after download
     sha256: 65b8fcd92af6b4fefa935c625d1ac27ea29dcb6ee14589c55a8f115ceaaa1423
 
-# --- Context ladder (PLAN.md §6) -------------------------------------------
+# --- Context ladder ---------------------------------------------------------
 # Token lengths for the doc-chat workload. 65536/131072 are stretch rungs.
 ladder_tokens: [2048, 4096, 8192, 16384, 32768]
 ladder_stretch_tokens: [65536, 131072]
 
-# --- Determinism (PLAN.md §0) ----------------------------------------------
+# --- Determinism ------------------------------------------------------------
 determinism:
   temperature: 0        # greedy decoding
   seed: 42              # fixed seed across all compared runs

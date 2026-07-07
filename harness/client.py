@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Streaming /completion client. TTFT = request-sent -> first non-empty CONTENT
-SSE chunk (role-only/empty chunks ignored, per PLAN §5.3). Captures the server's
+SSE chunk (role-only/empty chunks ignored). Captures the server's
 own `timings` object verbatim, the generated token ids (for byte-exact probes),
 and prompt_n (tokens actually prefilled -> reuse evidence)."""
 from __future__ import annotations

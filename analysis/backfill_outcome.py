@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""WS1.2: backfill `outcome` for warm rows that predate outcome stamping.
+"""Backfill `outcome` for warm rows that predate outcome stamping.
 
 outcome is a PURE FUNCTION of recorded verdicts (no re-measurement):
   probe PASS + reuse PASS -> WORKS
@@ -7,7 +7,7 @@ outcome is a PURE FUNCTION of recorded verdicts (no re-measurement):
   probe PASS + reuse FAIL -> SILENTLY-INEFFECTIVE
 Only rows with mode in WARM_MODES, empty outcome, and BOTH verdicts present are
 backfilled; each gets outcome_backfilled marker via labels? (schema has no labels col)
--> backfill is recorded here and in LABLOG by run_id list instead."""
+-> the backfill rule and count are documented in the dataset card."""
 import csv, glob, os, sys
 REPO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, os.path.join(REPO, "harness"))

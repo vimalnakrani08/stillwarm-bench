@@ -1,12 +1,12 @@
 #!/usr/bin/env python3
-"""CSV schema v1 — FROZEN 2026-07-04 (Gate-1 housekeeping). All Phase-2 rows use v1.
+"""CSV schema v1 — FROZEN 2026-07-04. All measured rows use v1 (or additive v1.1).
 
-Changes vs the unversioned Gate-1 dry-run schema:
+Changes vs the unversioned dry-run schema:
   + schema_version        "1"
   + block                 experiment block (A|B|C|D|E|side|pre)
   + side_experiment       1 = labeled side-cell, excluded from main charts
-  + save_point            doc_prefill | after_generation | ""   (Gate-0 keep/ files
-                          are after_generation; Phase-2 saves are doc_prefill)
+  + save_point            doc_prefill | after_generation | ""   (the earliest keep/
+                          files are after_generation; harness saves are doc_prefill)
   + page_cache_state      warm_read | cold_read | n/a  (restore rows; n/a elsewhere)
   + free_disk_gb_start    free disk (GB, df) at run start
   + cache_reuse_n         value of --cache-reuse if set, else ""
@@ -24,7 +24,7 @@ probe_result + reuse_assert; server_timings_json is the server's object verbatim
 
 SCHEMA_VERSION = "1.1"
 
-# v1.1 (Gate-2 correction, additive only): + resume_total_ms — the user-felt cost of
+# v1.1 (additive): + resume_total_ms — the user-felt cost of
 # resuming from disk = restore_ms + client TTFT of the follow-up request, computed
 # per row for disk-restore rows (blank elsewhere). The headline table is built on
 # resume_total; TTFT-only is the secondary "post-restore TTFT" view.

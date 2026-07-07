@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Schema v1.1 upgrade (Gate-2 correction 1, additive only).
+"""Schema v1.1 upgrade (additive only).
 
 Rewrites every results/block*.csv with the v1.1 header (adds resume_total_ms) and
 computes resume_total_ms = restore_ms + client_ttft_s*1000 for rows that have a

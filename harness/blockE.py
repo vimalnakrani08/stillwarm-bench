@@ -2,7 +2,7 @@
 """Block E — architectures (reduced grid): Qwen2.5-7B (low-KV-head) and
 Gemma-3-4B (SWA, --swa-full) x {8k, 32k} x {f16, q8_0}, cold vs disk_restore.
 PLUS one deliberate Gemma no---swa-full cell: the documented SILENTLY-INEFFECTIVE
-exhibit (Gate-0 finding, now measured under the frozen harness)."""
+exhibit (a known llama.cpp behavior, measured under the frozen harness)."""
 import json, os, sys
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)

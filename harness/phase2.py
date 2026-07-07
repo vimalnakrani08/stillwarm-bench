@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""
+"""Experiment orchestrator for the benchmark blocks. Schema v1 rows, one CSV per block/rung.
 
 Block A modes (mechanisms isolated — only the mode's own cache path is active):
   cold          --cache-ram 0, cache_prompt=false, q1 x (warmup+N)
@@ -145,7 +145,7 @@ def block_a(rung, reps=5, warmup=1, model_key="primary", ctk="f16", ctv="f16",
             modes=("cold", "prefix_reuse", "ram_parked", "disk_restore"), keep_save=False,
             fa="on", side_experiment=0):
     # fa != "on" is allowed ONLY for the labeled side-cell (side_experiment=1) and
-    # Block-D compatibility cells — never for headline measurements (Gate-0 amendment).
+    # Block-D compatibility cells — never for headline measurements (policy).
     if fa != "on" and not side_experiment:
         raise SystemExit("REFUSED: fa != 'on' outside a labeled side-experiment")
     m, model_path = model_entry(model_key)
@@ -366,7 +366,7 @@ def ram_evidence(rung="8k", model_key="primary"):
 # ---------------------------------------------------------------------------
 def block_c(rungs=("2k", "8k", "32k"), types=("f16", "q8_0", "q4_0"), reps=5, warmup=1):
     """Quantized-cache grid: cold + disk_restore per (rung x type). fa on everywhere
-    (required for quantized V anyway) -> settles the Gate-0 decode question unconfounded."""
+    (required for quantized V anyway) -> isolates the decode cost of quantized caches."""
     out = []
     for rung in rungs:
         for t in types:

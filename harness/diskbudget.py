@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Disk-budget enforcement for cache_saves/ (PLAN §0 disk discipline, §5.9).
+"""Disk-budget enforcement for cache_saves/.
 
 - remove_files(): delete specific scenario save files after measurement (unless kept).
 - enforce(): if cache_saves total exceeds DISK_BUDGET_GB, LRU-prune non-protected

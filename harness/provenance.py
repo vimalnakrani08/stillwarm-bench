@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
-"""AuditWeave provenance for the harness (PLAN §10). Optional import; if auditweave
+"""AuditWeave provenance for the harness. Optional import; if auditweave
 is absent this degrades to a no-op and the harness runs unchanged.
 
-CANDIDATE-ADAPTER FINDING (dogfooding, recorded in LABLOG): AuditWeave's event
+CANDIDATE-ADAPTER FINDING (dogfooding): AuditWeave's event
 vocabulary is RAG/data-pipeline shaped — SOURCE / RETRIEVAL / TRANSFORMATION /
 INFERENCE / DECISION / ATTESTATION — with NO benchmark lifecycle types. The four
 benchmark events the plan wants are mapped onto the closest generics + a

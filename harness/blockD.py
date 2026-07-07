@@ -4,8 +4,8 @@
 Outcome taxonomy per cell: WORKS / FAILS-CLEAN / SILENTLY-WRONG (probe fail) /
 SILENTLY-INEFFECTIVE (reuse fail). Baseline = cold gen on the RESTORE-side config.
 
-fa=off appears ONLY as a compatibility axis (d5), per the Gate-2 instructions —
-it is not a headline measurement. Mac->Linux is deferred to the Space (Phase 4).
+fa=off appears ONLY as a compatibility axis (d5) — it is not a headline
+measurement. Mac->Linux portability is exercised separately by the demo Space.
 """
 import json, os, sys, traceback
 HERE = os.path.dirname(os.path.abspath(__file__))
@@ -35,15 +35,15 @@ def cfgd(bin, tag, *, fa="on", ngl=99, ctx=16384, ctk="f16", ctv="f16"):
 BASE_NEW = cfgd(NEW_BIN, NEW_TAG)
 
 CELLS = [
-    # d2 — Gate-0 keep/ files (same build, old flags incl. fa=auto at save, save AFTER generation)
+    # d2 — earliest kept save files (same build, old flags incl. fa=auto, saved AFTER generation)
     ("d2_keep_f16", dict(question_text=Q_PHASE0, doc_source=KEEP_PROMPT,
                          existing_savefile="keep/phase0_llama_8k_f16.bin",
                          restore_cfg=BASE_NEW,
-                         note="Gate-0 f16 keep file (fa=auto at save, after_generation) -> b9871 fa=on")),
+                         note="early f16 keep file (fa=auto at save, after_generation) -> b9871 fa=on")),
     ("d2_keep_q8", dict(question_text=Q_PHASE0, doc_source=KEEP_PROMPT,
                         existing_savefile="keep/phase0_llama_8k_q8.bin",
                         restore_cfg=cfgd(NEW_BIN, NEW_TAG, ctk="q8_0", ctv="q8_0"),
-                        note="Gate-0 q8_0 keep file -> b9871 q8_0 fa=on")),
+                        note="early q8_0 keep file -> b9871 q8_0 fa=on")),
     # d3 — cross-build, both directions (f16, fa on, 8K)
     ("d3_old_to_new", dict(question_text=Q_STD, doc_source=DOC_8K,
                            save_cfg=cfgd(OLD_BIN, OLD_TAG), restore_cfg=BASE_NEW,
